@@ -2,17 +2,17 @@
 #define MAP_H
 
 #include <Windows.h>
-#define LENGTH 30 // 内宽
+#define LENGTH 60 // 内宽
 
 class Map
 {
 private:
     COORD coord = {0, 0};
     DWORD bytes = 0;
-    char data[LENGTH + 2][LENGTH + 2];
-
+    char data[LENGTH/2+1][LENGTH+2];
 public:
-    void draw(HANDLE);
+    void drawFrame(HANDLE);
+    void drawSnake(HANDLE);
 };
 
 #endif

@@ -13,6 +13,7 @@ private:
 public:
     Game();
     void game();
+    void fullScreen();
 };
 
 #endif
