@@ -5,31 +5,22 @@ using namespace std;
 
 void Map::drawFrame(HANDLE h_output)
 {
-    for (int y = 0; y < LENGTH/2 + 1; y++)
+    for (int y = 0; y < LENGTH/2 + 2; y++)
     {
-        for (int x = 0; x < LENGTH + 2; x++)
+        coord.Y = y;
+        for (int x = 0; x < LENGTH + 4; x+=2)
         {
-            if (y == 0 || y == LENGTH/2) // 上下边框
+            coord.X = x;
+            if (y == 0 || y == LENGTH/2 + 1 || x == 0 || x == LENGTH + 2) // 上下边框
             {
-                data[y][x] = '-';
-            }
-            else if (x == 0 || x == LENGTH + 1)
-            {
-                data[y][x] = '|';
+                WriteConsoleOutputCharacterA(h_output, "■", 4, coord, &bytes);
             }
             else // TODO: 记得扩充蛇和食物的部分
             {
-                data[y][x] = ' ';
+                WriteConsoleOutputCharacterA(h_output, "   ", 4, coord, &bytes);
 
             }
             
         }
     }
-
-    for (int i = 0;i < LENGTH/2 + 1; i++)
-    {
-        coord.Y = i;
-        WriteConsoleOutputCharacterA(h_output, data[i], LENGTH + 2, coord, &bytes);
-    }
-
 }

@@ -2,7 +2,7 @@
 #define MAP_H
 
 #include <Windows.h>
-#define LENGTH 60 // 内宽
+#define LENGTH (40 * 2) // 前一个数字内宽, 字符占两个字符
 
 class Map
 {

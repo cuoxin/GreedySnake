@@ -4,7 +4,9 @@ using namespace std;
 
 Game::Game()
 {
-    system("mode con cols=100 lines=40");
+    char sys[50];
+    sprintf(sys, "mode con cols=%d lines=%d",LENGTH+45, LENGTH/2+5);
+    system(sys);
     h_all[0] = CreateConsoleScreenBuffer(
         GENERIC_WRITE,//定义进程可以往缓冲区写数据
         FILE_SHARE_WRITE,//定义缓冲区可共享写权限
