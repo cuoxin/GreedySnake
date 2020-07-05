@@ -1,12 +1,6 @@
 #include "../header/Snake.h"
-#include "../header/Map.h"
 
 #include <iostream>
-#include <stdlib.h>
-#include <ctime>
-#include <cstdlib>
-
-#define RANDOM(a, b) rand()%b+a;
 
 using namespace std;
 
@@ -17,10 +11,8 @@ Snake::Snake()
     S first_point = (S)malloc(sizeof(struct Snake)); // 蛇头
 
     // 随机位置生成蛇头
-    srand((unsigned)time(0));
-    int x = RANDOM(1, LENGTH);
-    srand((unsigned)time(0));
-    int y = RANDOM(1, LENGTH/2);
+    int x,y;
+    point.randomPoint(&x, &y);
 
     first_point->x = x;
     first_point->y = y;
@@ -42,4 +34,19 @@ Snake::~Snake()
         head = temple;
     }
 
+}
+
+void Snake::drawSnake(HANDLE h_output)
+{
+    COORD coord = {0, 0};
+    DWORD bytes = 0;
+    S snake_point;
+    snake_point = head->next;
+    while (snake_point != NULL)
+    {
+        coord.X = snake_point->x;
+        coord.Y = snake_point->y;
+        WriteConsoleOutputCharacterA(h_output, "●", 4, coord, &bytes);
+        snake_point = snake_point->next;
+    }
 }

@@ -42,9 +42,19 @@ void Game::game()
     {
         while (1) // 单局循环
         {   
-            SetConsoleActiveScreenBuffer(h_all[0]);
+            h_bool = !h_bool;
+
+            if (food_bool)
+            {
+                food.newFood();
+                food_bool = 0;
+            }
+
+            food.drawFood(h_all[h_bool]);
+            snake.drawSnake(h_all[h_bool]);
+            SetConsoleActiveScreenBuffer(h_all[h_bool]);
+
             Sleep(500);
-            SetConsoleActiveScreenBuffer(h_all[1]);
             
         }
         
