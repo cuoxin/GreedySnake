@@ -12,7 +12,7 @@ private:
     char data[LENGTH/2+1][LENGTH+2];
 public:
     void drawFrame(HANDLE);
-    void drawSnake(HANDLE);
+    void clean(HANDLE);
 };
 
 #endif

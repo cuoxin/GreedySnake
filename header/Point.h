@@ -12,7 +12,7 @@ class Point
 private:
     /* data */
 public:
-void randomPoint(int *, int *);
+void randomPoint(int *, int *, int);
 };
 
 

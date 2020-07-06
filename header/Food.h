@@ -9,7 +9,8 @@ class Food
 private:
     Point point;
 public:
-    int x, y;
+    COORD coord = {0, 0};
+    DWORD bytes = 0;
     void newFood();
     void drawFood(HANDLE);
 };

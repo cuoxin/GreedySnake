@@ -30,9 +30,6 @@ Game::Game()
     SetConsoleCursorInfo(h_all[0], &cci);
     SetConsoleCursorInfo(h_all[1], &cci);
 
-    // 画边框
-    map.drawFrame(h_all[0]);
-    map.drawFrame(h_all[1]);
 }
 
 
@@ -40,21 +37,30 @@ void Game::game()
 {
     while (1) // 总游戏循环
     {
+        // 画边框
+        map.drawFrame(h_all[0]);
+        map.drawFrame(h_all[1]);
+        
         while (1) // 单局循环
         {   
             h_bool = !h_bool;
 
+            // 食物
             if (food_bool)
             {
                 food.newFood();
                 food_bool = 0;
             }
 
+            snake.changeV();
+            snake.moveSnake();
             food.drawFood(h_all[h_bool]);
             snake.drawSnake(h_all[h_bool]);
             SetConsoleActiveScreenBuffer(h_all[h_bool]);
 
-            Sleep(500);
+            // 清屏（除边框）
+            map.clean(h_all[!h_bool]);
+            Sleep(800);
             
         }
         

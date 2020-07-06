@@ -3,6 +3,8 @@
 
 #include "Map.h"
 #include "Point.h"
+#include <conio.h>
+#include <stdio.h>
 
 typedef struct SNAKE
 {
@@ -18,6 +20,8 @@ private:
     S head;
     // 蛇的长度
     int length;
+    // 蛇的移动速度
+    int v[2];
 public:
     Snake();
     ~Snake();
@@ -31,6 +35,10 @@ public:
     void eatFood();
     // 失败的判定
     void judge();
+    // 初始化速度
+    void initV();
+    // 改变速度
+    void changeV();
 
 };
 
