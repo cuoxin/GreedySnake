@@ -51,16 +51,17 @@ void Game::game()
                 food.newFood();
                 food_bool = 0;
             }
+            food.drawFood(h_all[h_bool]);
 
             snake.changeV();
             snake.moveSnake();
-            food.drawFood(h_all[h_bool]);
             snake.drawSnake(h_all[h_bool]);
+            snake.eatFood(food.x, food.y, &food_bool);
             SetConsoleActiveScreenBuffer(h_all[h_bool]);
 
             // 清屏（除边框）
             map.clean(h_all[!h_bool]);
-            Sleep(800);
+            Sleep(200);
             
         }
         

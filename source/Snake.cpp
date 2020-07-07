@@ -17,8 +17,11 @@ Snake::Snake()
     first_point->x = x;
     first_point->y = y;
     first_point->next = NULL;
+    first_point->previous = NULL;
 
     head->next = first_point;
+
+    tail = head->next;
 
     initV();
 
@@ -48,7 +51,7 @@ void Snake::drawSnake(HANDLE h_output)
     {
         coord.X = snake_point->x;
         coord.Y = snake_point->y;
-        WriteConsoleOutputCharacterA(h_output, "●", 4, coord, &bytes);
+        WriteConsoleOutputCharacterA(h_output, "●", 2, coord, &bytes);
         snake_point = snake_point->next;
     }
 }
@@ -56,22 +59,17 @@ void Snake::drawSnake(HANDLE h_output)
 
 void Snake::moveSnake()
 {
-    S snake_point, temple;
-    snake_point = head->next;
+    S snake_point;
+    snake_point = tail;
 
-    while (snake_point != NULL)
+    while (snake_point->previous != NULL)
     {
-        temple = snake_point;
-        snake_point = snake_point->next;
-        if (snake_point == NULL)
-        {
-            break;
-        }
-
-        snake_point->x = temple->x;
-        snake_point->y = temple->y;
+        snake_point->x = snake_point->previous->x;
+        snake_point->y = snake_point->previous->y;
+        snake_point = snake_point->previous;
 
     }
+
     snake_point = head->next;
 
     snake_point->x += v[0];
@@ -155,4 +153,29 @@ void Snake::changeV()
             }
         }
     }
+}
+
+
+void Snake::eatFood(int x, int y, int *eat_bool)
+{
+    S snake_head = head->next; // 真正的蛇头
+    
+    if (x == snake_head->x && y == snake_head->y)
+    {
+        *eat_bool = 1;
+        addSnake();
+    }
+}
+
+
+void Snake::addSnake()
+{
+    S new_point = (S)malloc(sizeof(struct SNAKE));
+    new_point->x = tail->x+2;
+    new_point->y = tail->y;
+    new_point->next = NULL;
+    new_point->previous = tail;
+
+    tail->next = new_point;
+    tail = new_point;
 }

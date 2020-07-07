@@ -11,13 +11,14 @@ typedef struct SNAKE
     int x;
     int y;
     struct SNAKE *next;
+    struct SNAKE *previous;
 }*S;
 
 class Snake
 {
 private:
     Point point;
-    S head;
+    S head, tail;
     // 蛇的长度
     int length;
     // 蛇的移动速度
@@ -25,14 +26,14 @@ private:
 public:
     Snake();
     ~Snake();
-    // 增加节点,头插法
+    // 增加节点,尾插法
     void addSnake();
     // 蛇节点的移动
     void moveSnake();
     // 画蛇
     void drawSnake(HANDLE);
     // 吃食物的判定
-    void eatFood();
+    void eatFood(int, int, int *);
     // 失败的判定
     void judge();
     // 初始化速度

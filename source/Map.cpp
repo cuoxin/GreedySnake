@@ -34,7 +34,7 @@ void Map::clean(HANDLE h_output)
             }
             else
             {
-                WriteConsoleOutputCharacterA(h_output, " ", 2, coord, &bytes);
+                WriteConsoleOutputCharacterA(h_output, "   ", 2, coord, &bytes);
             }
             
         }

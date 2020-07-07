@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include "Map.h"
 
-#define RANDOM(a, b) rand()%b+a;
+#define RANDOM(a, b) (rand() % (b-a+1))+ a;
 
 class Point
 {
