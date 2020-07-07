@@ -35,11 +35,13 @@ public:
     // 吃食物的判定
     void eatFood(int, int, int *);
     // 失败的判定
-    void judge();
+    int judge();
     // 初始化速度
     void initV();
     // 改变速度
     void changeV();
+    // 检查与蛇重复
+    int repeat(int, int);
 
 };
 

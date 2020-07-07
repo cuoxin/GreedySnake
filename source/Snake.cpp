@@ -51,7 +51,7 @@ void Snake::drawSnake(HANDLE h_output)
     {
         coord.X = snake_point->x;
         coord.Y = snake_point->y;
-        WriteConsoleOutputCharacterA(h_output, "●", 2, coord, &bytes);
+        WriteConsoleOutputCharacterA(h_output, "●", 2, coord, &bytes); // 当设置为 4 时会出现bug
         snake_point = snake_point->next;
     }
 }
@@ -178,4 +178,55 @@ void Snake::addSnake()
 
     tail->next = new_point;
     tail = new_point;
+}
+
+
+int Snake::repeat(int x, int y)
+{
+    S snake_point;
+
+    snake_point = head->next->next;
+
+    while (snake_point != NULL)
+    {
+        if (snake_point->x == x && snake_point->y == y)
+        {
+            return 1;
+        }
+
+        snake_point = snake_point->next;
+    }
+
+    return 0;
+    
+}
+
+int Snake::judge()
+{
+    S snake_first = head->next;
+    int first_x = snake_first->x, first_y = snake_first->y;
+    int frame_judge = first_x < 2 || first_y < 1 || first_x > LENGTH || first_y > LENGTH/2;
+    int own;
+    switch (frame_judge)
+    {
+    case 1:
+        return 1;
+        break;
+    
+    case 0:
+        own = repeat(first_x, first_y);
+        switch (own)
+        {
+        case 1:
+            return 1;
+            break;
+        
+        default:
+            break;
+        }
+
+    default:
+        break;
+    }
+    return 0;
 }

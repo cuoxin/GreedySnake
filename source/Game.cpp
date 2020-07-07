@@ -49,21 +49,40 @@ void Game::game()
             if (food_bool)
             {
                 food.newFood();
-                food_bool = 0;
+                if (snake.repeat(food.x, food.y))
+                {
+                    ;
+                }
+                else
+                {
+
+                    food_bool = 0;
+                }
             }
             food.drawFood(h_all[h_bool]);
 
             snake.changeV();
             snake.moveSnake();
+            if (snake.judge())
+            {
+                break;
+            }
             snake.drawSnake(h_all[h_bool]);
             snake.eatFood(food.x, food.y, &food_bool);
             SetConsoleActiveScreenBuffer(h_all[h_bool]);
+            /*
+            if (snake.judge())
+            {
+                break;
+            }
+            */
 
             // 清屏（除边框）
             map.clean(h_all[!h_bool]);
             Sleep(200);
             
         }
+        break;
         
     }
     
