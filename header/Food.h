@@ -12,6 +12,9 @@ private:
     DWORD bytes = 0;
 public:
     int x,y;
+    int food_bool;
+    Food();
+    ~Food();
     void newFood();
     void drawFood(HANDLE);
 };

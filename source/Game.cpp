@@ -35,54 +35,61 @@ Game::Game()
 
 void Game::game()
 {
+    int question_result;
+    // 画边框
+    map.drawFrame(h_all[0]);
+    map.drawFrame(h_all[1]);
     while (1) // 总游戏循环
     {
-        // 画边框
-        map.drawFrame(h_all[0]);
-        map.drawFrame(h_all[1]);
+        Snake *snake = new Snake();
+        Food *food = new Food();
         
         while (1) // 单局循环
         {   
             h_bool = !h_bool;
 
             // 食物
-            if (food_bool)
+            if (food->food_bool)
             {
-                food.newFood();
-                if (snake.repeat(food.x, food.y))
+                food->newFood();
+                if (snake->repeat(food->x, food->y))
                 {
                     ;
                 }
                 else
                 {
 
-                    food_bool = 0;
+                    food->food_bool = 0;
                 }
             }
-            food.drawFood(h_all[h_bool]);
+            food->drawFood(h_all[h_bool]);
 
-            snake.changeV();
-            snake.moveSnake();
-            if (snake.judge())
+            snake->changeV();
+            snake->moveSnake();
+            if (snake->judge())
             {
                 break;
             }
-            snake.drawSnake(h_all[h_bool]);
-            snake.eatFood(food.x, food.y, &food_bool);
+            snake->drawSnake(h_all[h_bool]);
+            snake->eatFood(food->x, food->y, &food->food_bool);
             SetConsoleActiveScreenBuffer(h_all[h_bool]);
-            /*
-            if (snake.judge())
-            {
-                break;
-            }
-            */
 
             // 清屏（除边框）
             map.clean(h_all[!h_bool]);
             Sleep(200);
             
         }
-        break;
+
+        question_result = MessageBox(NULL, TEXT("你失败了，请问是否继续？"), TEXT("提示"), MB_OKCANCEL|MB_ICONQUESTION);
+        if (question_result == IDOK)
+        {
+            delete snake;
+            delete food;
+        }
+        else
+        {
+            break;
+        }
         
     }
     

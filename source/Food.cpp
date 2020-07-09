@@ -1,5 +1,17 @@
 #include "../header/Food.h"
 
+Food::Food()
+{
+    food_bool = 1;
+}
+
+Food::~Food()
+{
+    food_bool = 1;
+}
+
+
+
 void Food::newFood()
 {
     point.randomPoint(&x, &y, 2);
